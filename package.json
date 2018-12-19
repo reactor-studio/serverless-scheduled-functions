@@ -1,7 +1,7 @@
 {
-  "name": "serverless-plugin-scheduled-functions",
+  "name": "serverless-scheduled-functions",
   "version": "1.0.0",
-  "description": "Plugin for creating scheduled functions in code, without registering them to serverless.yml",
+  "description": "Plugin for creating scheduled functions in code, without registering them to serverless config",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
@@ -14,5 +14,8 @@
     "functions"
   ],
   "author": "Ivan Vukovic",
-  "license": "MIT"
+  "license": "MIT",
+  "dependencies": {
+    "@babel/register": "^7.0.0"
+  }
 }
