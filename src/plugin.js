@@ -12,7 +12,7 @@ class ScheduledFunctions {
         lifecycleEvents: [
           'setupFunctions'
         ],
-        usage: 'Adds scheduled functions'
+        usage: 'Registers lambdas referenced in code as @scheduled'
       },
     };
 
