@@ -1,19 +1,16 @@
 const path = require('path');
-const fs = require('fs-extra');
+const _ = require('lodash');
 const compileFunctions = require('./compile-functions.js');
 const { scheduled, scheduleHandler } = require('./scheduled');
-const _ = require('lodash');
 
 class ScheduledFunctions {
   constructor(serverless, options) {
     this.serverless = serverless;
 
     this.commands = {
-      'scheduled': {
-        lifecycleEvents: [
-          'setupFunctions'
-        ],
-        usage: 'Registers lambdas referenced in code as @scheduled'
+      scheduled: {
+        lifecycleEvents: ['setupFunctions'],
+        usage: 'Registers lambdas referenced in code as @scheduled',
       },
     };
 
@@ -24,13 +21,15 @@ class ScheduledFunctions {
       'before:offline:start': this.addFunctions.bind(this),
     };
 
-    this.environmentVariables = {}
-
+    this.environmentVariables = {};
   }
 
   registerFunctions() {
     const configPath = _.get(this, 'serverless.service.custom.scheduled.path');
-    const functionsPaths = path.join(this.serverless.config.servicePath, configPath);
+    const functionsPaths = path.join(
+      this.serverless.config.servicePath,
+      configPath
+    );
     require('@babel/register');
     require(functionsPaths);
   }
@@ -39,7 +38,10 @@ class ScheduledFunctions {
     this.registerFunctions();
 
     const funcs = _.get(this, 'serverless.service.functions') || {};
-    const mergedFunctions = Object.assign(funcs, compileFunctions(this.serverless));
+    const mergedFunctions = Object.assign(
+      funcs,
+      compileFunctions(this.serverless)
+    );
 
     _.set(this, 'serverless.service.functions', mergedFunctions);
 
