@@ -50,3 +50,4 @@ const scheduler = new Scheduler();
 module.exports.scheduled = scheduler.register;
 module.exports.getFunctions = scheduler.getFunctions;
 module.exports.scheduleHandler = scheduler.runFunction;
+module.exports.scheduler = scheduler;

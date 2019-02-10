@@ -1,6 +1,7 @@
 const path = require('path');
 const fs = require('fs-extra');
 const compileFunctions = require('./compile-functions.js');
+const { scheduled, scheduleHandler } = require('./scheduled');
 const _ = require('lodash');
 
 class ScheduledFunctions {
@@ -35,15 +36,18 @@ class ScheduledFunctions {
   }
 
   addFunctions() {
+    this.registerFunctions();
+
     const funcs = _.get(this, 'serverless.service.functions') || {};
     const mergedFunctions = Object.assign(funcs, compileFunctions(this.serverless));
-    
-    this.registerFunctions();
 
     _.set(this, 'serverless.service.functions', mergedFunctions);
 
     return Promise.resolve();
   }
 }
+
+ScheduledFunctions.scheduled = scheduled;
+ScheduledFunctions.scheduleHandler = scheduleHandler;
 
 module.exports = ScheduledFunctions;
