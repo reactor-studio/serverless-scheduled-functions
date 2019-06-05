@@ -1,4 +1,3 @@
-const fs = require('fs');
 const _ = require('lodash');
 
 /**
@@ -14,6 +13,7 @@ class Scheduler {
     this.getFunctions = this.getFunctions.bind(this);
     this.runFunction = this.runFunction.bind(this);
   }
+
   /**
    * Higher order function which registers a function the the scheduler
    * @param  {string} name - Name of the function, that parameter will be used to name the lambda

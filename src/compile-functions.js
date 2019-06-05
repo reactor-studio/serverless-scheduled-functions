@@ -1,11 +1,11 @@
-const { getFunctions } = require('./scheduled');
 const _ = require('lodash');
+const { getFunctions } = require('./scheduled');
 
 module.exports = serverless => {
   const functions = getFunctions();
 
   const provider = serverless.getProvider('aws');
-  const service = serverless.service.service;
+  const { service } = serverless.service;
   const stage = provider.getStage();
   const handler = _.get(serverless, 'service.custom.scheduled.handler');
   const environment = _.get(serverless, 'service.custom.scheduled.environment');
@@ -13,8 +13,12 @@ module.exports = serverless => {
   return _.reduce(
     functions,
     (settings, func, name) => {
-      serverless.cli.consoleLog(`[Scheduled functions] Compiling function with name: ${name}`);
-      const options = _.isString(func.options) ? { rate: func.options } : func.options;
+      serverless.cli.consoleLog(
+        `[Scheduled functions] Compiling function with name: ${name}`
+      );
+      const options = _.isString(func.options)
+        ? { rate: func.options }
+        : func.options;
       return {
         ...settings,
         [func.name]: {
@@ -33,6 +37,6 @@ module.exports = serverless => {
         },
       };
     },
-    {},
+    {}
   );
 };

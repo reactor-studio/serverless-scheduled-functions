@@ -4,7 +4,9 @@
   "description": "Plugin for creating scheduled functions in code, without registering them to serverless config",
   "main": "src/index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "prelint": "eslint --print-config . | eslint-config-prettier-check",
+    "lint": "eslint . --report-unused-disable-directives"
   },
   "keywords": [
     "serverless",
@@ -20,5 +22,31 @@
     "@babel/register": "^7.0.0",
     "fs-extra": "^7.0.1",
     "lodash": "^4.17.11"
+  },
+  "devDependencies": {
+    "eslint": "^5.13.0",
+    "eslint-config-airbnb-base": "^13.1.0",
+    "eslint-config-prettier": "^4.0.0",
+    "eslint-plugin-import": "^2.16.0",
+    "eslint-plugin-prettier": "^3.0.1",
+    "husky": "^1.3.1",
+    "lint-staged": "^8.1.3",
+    "prettier": "^1.16.4"
+  },
+  "prettier": {
+    "singleQuote": true,
+    "trailingComma": "es5"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged",
+      "pre-push": "yarn lint"
+    }
+  },
+  "lint-staged": {
+    "*.js": [
+      "eslint --fix",
+      "git add"
+    ]
   }
 }

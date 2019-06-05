@@ -1,0 +1,10 @@
+extends:
+  - airbnb-base
+  - plugin:prettier/recommended
+
+rules:
+  global-require: off
+  no-unused-vars:
+    - error
+    - args: none
+  import/no-dynamic-require: off
