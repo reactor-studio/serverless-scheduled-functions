@@ -19,6 +19,7 @@ class ScheduledFunctions {
       'before:logs:logs': this.addFunctions.bind(this),
       'before:offline:start:init': this.addFunctions.bind(this),
       'before:offline:start': this.addFunctions.bind(this),
+      'before:webpack:webpack': this.addFunctions.bind(this),
     };
 
     this.environmentVariables = {};
