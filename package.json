@@ -1,6 +1,6 @@
 {
   "name": "serverless-scheduled-functions",
-  "version": "1.0.17",
+  "version": "1.0.19",
   "description": "Plugin for creating scheduled functions in code, without registering them to serverless config",
   "main": "src/index.js",
   "scripts": {
