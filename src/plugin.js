@@ -32,7 +32,9 @@ class ScheduledFunctions {
       this.serverless.config.servicePath,
       configPath
     );
-    require('@babel/register');
+    require('@babel/register')({
+      extensions: ['.es6', '.es', '.jsx', '.js', '.mjs', '.ts', '.tsx'],
+    });
     require(functionsPaths);
   }
 
